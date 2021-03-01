@@ -21,7 +21,7 @@ int main(void) {
     printf("Ingrese la cantidad de veces que se lanza una moneda (0 < n <= 6):\n");
     scanf("%d",&n);
     //porvamos que sea valido
-    if(n<=0 && n>=7){
+    if(n<=0 || n>=7){
         printf("Cantidad de veces no válida\n");
         return 0;
     }
