@@ -20,9 +20,9 @@ int main(void) {
 	int n;
     printf("Ingrese la cantidad de veces que se lanza una moneda (0 < n <= 6):\n");
     scanf("%d",&n);
-    //porvamos que sea valido
+    //provamos que sea valido
     if(n<=0 || n>=7){
-        printf("Cantidad de veces no válida\n");
+        printf("Cantidad de veces no válida.\n");
         return 0;
     }
     printf("La grafica de distribución de probabilidades es:\n");
@@ -31,9 +31,13 @@ int main(void) {
         printf("  ");
     }
     printf("   f(xi)\n");
+    //recordar que en combinatoria (n,x)=(n,n-x)
+    //El max valor es (n,n/2) en caso sea impar es el mimo valor que (n,n/2+1)
+    
     int pot=pow(2,n);
     int max_prob=comb(n,n/2);
     int mid=n/2;
+    //La idea es ir construyendo desde el centro hacia los bordes
     for(i=max_prob;i>=1;i--){
         for(j=0;j<=n/2;j++){
             int val=comb(n,j);
