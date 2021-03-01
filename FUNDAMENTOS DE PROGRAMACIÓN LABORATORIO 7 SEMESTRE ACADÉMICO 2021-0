@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <math.h>
-//using namespace std;
 
 int comb(int sup,int inf){
     if(inf ==0)return 1;
@@ -60,7 +59,6 @@ int main(void) {
                 
         }
         
-        //printf("%d/%d\n"i,pot);
         printf("%d",i);
         printf("/%d\n",pot);
     }
