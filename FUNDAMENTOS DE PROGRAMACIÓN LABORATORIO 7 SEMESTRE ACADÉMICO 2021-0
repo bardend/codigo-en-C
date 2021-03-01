@@ -1,18 +1,7 @@
 #include <stdio.h>
 #include <math.h>
 
-int comb(int sup,int inf){
-    if(inf ==0)return 1;
-    int numerador=1,denominador=1;
-    for(int i=1;i<=inf;i++){
-        numerador*=sup;
-        sup--;
-    }
-    for(int i=1;i<=inf;i++){
-        denominador*=i;
-    }
-    return(numerador/denominador);
-}
+int comb(int sup,int inf);
 
 int main(void) {
 	int i,j,k;
@@ -69,4 +58,17 @@ int main(void) {
     }
     
     return 0;
+}
+
+int comb(int sup,int inf){
+    if(inf ==0)return 1;
+    int numerador=1,denominador=1;
+    for(int i=1;i<=inf;i++){
+        numerador*=sup;
+        sup--;
+    }
+    for(int i=1;i<=inf;i++){
+        denominador*=i;
+    }
+    return(numerador/denominador);
 }
