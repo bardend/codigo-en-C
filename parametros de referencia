@@ -1,0 +1,125 @@
+#include<stdio.h>
+#include <math.h>
+
+int Leer_y_Validar(char *ptr_opcion, int *ptr_termino, int *ptr_termino_valido);
+int Fibonacci_Definicion(int termino);
+double Fibonacci_Formula(int termino);
+int Fibonacci_MetodoPuntos(int termino);
+
+int main(){
+	
+	char opcion;
+	int termino, termino_valido;
+	int fibonacci_n;
+	int valido;
+	do{
+		valido = Leer_y_Validar(&opcion,&termino,&termino_valido);
+		if(valido==1){
+			
+			if(termino_valido==1){
+			
+				switch(opcion){
+					case 'D':
+					case 'd':{
+						fibonacci_n = Fibonacci_Definicion(termino);
+						printf("El valor del termino %d usando la Definicion es: %d\n",termino,fibonacci_n);
+						break;
+					}
+					case 'F':
+					case 'f':{
+						double fibo_n = Fibonacci_Formula(termino);
+						printf("El valor del termino %d usando la Formula es: %lf\n",termino,fibo_n);			
+						break;
+					}
+					case 'P':
+					case 'p':{
+						fibonacci_n = Fibonacci_MetodoPuntos(termino);
+						printf("El valor del termino %d usando el Metodo de los Puntos es: %d\n",termino,fibonacci_n);
+						break;
+					}
+				}
+			}
+		}		
+	}while(valido==1);
+	
+	return 0;
+}
+int Leer_y_Validar(char *ptr_opcion, int *ptr_termino, int *ptr_termino_valido){
+	printf("Ingrese la opcion para calcular un termino de la Sucesion de Fibonacci (D d:Definicion, F f: Formula, P p: Puntos): ");
+	scanf(" %c",ptr_opcion);
+	
+	int valido = 0;	
+	switch(*ptr_opcion){
+		case 'D':
+		case 'd':
+		case 'F':
+		case 'f':
+		case 'P':
+		case 'p':{
+			valido = 1;
+			break;
+		}
+	}
+	
+	if(valido==1){
+		printf("Ingrese el termino: ");
+		scanf("%d",ptr_termino);	
+		if(0<*ptr_termino && *ptr_termino<=30){
+			*ptr_termino_valido=1;
+		}else{
+			*ptr_termino_valido=0;
+			printf("El termino debe ser positivo y menor o igual 30.\n");
+		}
+	}
+	
+	return valido;	 
+}
+
+int Fibonacci_Definicion(int termino){
+	int f_n_1=1, f_n_2=1;
+	if(termino==0 || termino==1) return 1;
+	else{
+		int copia;
+		int fib=3;
+		do{
+			copia=f_n_1;
+			f_n_1=f_n_1+f_n_2;
+			f_n_2=copia;
+			
+			fib++;
+		}while(fib<=termino);
+		
+		return f_n_1;
+	}
+}
+
+double Fibonacci_Formula(int termino){
+	double part_1 = (1.0/sqrt(5.0))*pow(((1.0+sqrt(5.0))/2.0),termino);
+	double part_2 = ((1.0/sqrt(5.0))*pow(((1.0-sqrt(5.0))/2.0),termino));
+	return part_1-part_2;
+}
+
+int Fibonacci_MetodoPuntos(int termino){
+	int a=1,b=0;
+	int c=0,d=1;
+	
+	int i=termino-1;
+	
+	if(i>0){
+		printf("proceso iterativo\n");
+		do{			
+			if(i%2==1){		
+				int copia_a=a, copia_b=b;	
+				a = b*d + a*c;
+				b = b*d + copia_a*d + b*c;
+			}
+			
+			int copia_c=c;
+			c = pow(c,2) + pow(d,2);
+			d = 2*copia_c*d + pow(d,2);					
+			
+			i = i/2;
+		}while(i>0);	
+	}
+	return a+b;
+}
