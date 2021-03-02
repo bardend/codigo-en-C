@@ -1,0 +1,64 @@
+#include <stdio.h>
+#include <math.h>
+int leer_validar(char *opcion,int *termino,int *termino_valido);
+int main(void) {
+	char opcion;
+	int termino,termino_valido;
+	int valido;
+	do{
+		valido=leer_validar(&opcion,&termino,&termino_valido);
+		if(valido==1){
+			if(termino_valido==1){
+				switch(opcion){
+					case 'D':
+					case 'd':{
+						printf("GA\n");
+						break;
+					}
+					case 'F':
+					case 'f':{
+						printf("GO\n");
+						break;
+					}
+					case 'P':
+					case 'p':{
+						printf("ola\n");
+						break;
+					}
+				}
+			}
+		}
+		
+	}while(valido==1);
+	
+	return 0;
+}
+int leer_validar(char *opcion,int *termino ,int *termino_valido){
+		scanf(" %c",opcion);
+		int valido=0;
+		switch(*opcion){
+			case 'D':
+			case 'd':
+			case 'F':
+			case 'f':
+			case 'p':
+			case 'P':{
+				valido=1;
+				break;
+			}
+		}
+		if(valido==1){
+					printf("Ingrese el termino: ");
+					scanf("%d",termino);
+					if(*termino<=30)
+						*termino_valido=1;
+					else {
+									printf("El termino debe ser positivo y menor o igual 30.\n");
+					
+												*termino_valido=0;
+
+					}
+						
+		}
+		return valido;
+}
